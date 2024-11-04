@@ -4,8 +4,10 @@ import com.example.imageapi.service.ImageService;
 import java.io.IOException;
 import java.io.InputStream;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/images")
@@ -17,6 +19,6 @@ public class ImageController {
     public String uploadImage(@RequestParam("file") InputStream inputStream, @RequestParam("name") String fileName)
             throws IOException {
         long contentLength = inputStream.available();
-        return imageService.upLoadImage(inputStream,fileName,contentLength);
+        return imageService.uploadImage(fileName, inputStream, contentLength);
     }
 }
