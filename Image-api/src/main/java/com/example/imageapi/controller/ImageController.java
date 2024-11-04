@@ -3,6 +3,7 @@ package com.example.imageapi.controller;
 import com.example.imageapi.service.ImageService;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +31,7 @@ public class ImageController {
     }
 
     @GetMapping("/get")
-    public String getImageUrl(@RequestParam("fileName") String fileName) {
-        return imageService.getImageUrl(fileName);
+    public List<String> getImageUrl() {
+        return imageService.listAllImages();
     }
 }
