@@ -9,9 +9,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ImageRepository {
-    @Autowired
+
     private AmazonS3 amazonS3;
 
+    @Autowired // 생성자 주입
+    public ImageRepository(AmazonS3 amazonS3) {
+        this.amazonS3 = amazonS3;
+    }
 
     @Value("${aws.s3.bucket.name}")
     private String bucketName;
