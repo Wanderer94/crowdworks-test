@@ -21,4 +21,10 @@ public class ImageController {
         long contentLength = inputStream.available();
         return imageService.uploadImage(fileName, inputStream, contentLength);
     }
+
+    @PostMapping("/delete")
+    public String deleteImage(@RequestParam("fileName") String fileName) {
+        imageService.deleteImage(fileName);
+        return "Image deleted successfully.";
+    }
 }
