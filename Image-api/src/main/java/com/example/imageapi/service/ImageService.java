@@ -51,4 +51,8 @@ public class ImageService {
             throw new RuntimeException("Failed to delete image from S3", e);
         }
     }
+    
+    public String getImageUrl(String fileName) {
+        return s3Client.utilities().getUrl(builder -> builder.bucket(bucketName).key(fileName)).toExternalForm();
+    }
 }
