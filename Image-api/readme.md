@@ -18,6 +18,16 @@
 │                   └── ImageServiceTest.java  # API 단위 테스트
 └── build.gradle
 ```
+#### 실행 전 필수 설정
+1. **AWS IAM 권한 설정**:
+   - AWS 콘솔에서 IAM을 통해 S3 액세스 권한을 가진 사용자를 생성합니다. 생성된 사용자의 `access key`와 `secret key`는 프로젝트 실행 환경에 설정해 주어야 합니다.
+
+2. **환경 변수 설정**:
+   - 프로젝트의 `application.properties` 또는 `application.yml` 파일에 AWS 관련 설정을 추가합니다:
+   ```properties
+   aws.s3.bucket.name=your-s3-bucket-name
+   aws.s3.max-file-size=5242880  # 최대 파일 크기: 5MB
+   ```
 
 ## API 사용 방법
 
@@ -135,6 +145,26 @@ aws.s3.max-file-size=5242880  # 최대 파일 크기: 5MB
 
 #### 추가: 자동화 테스트 실행
 테스트 코드는 `ImageServiceTest.java` 파일에 작성되어 있으며, `./gradlew test` 명령으로 실행할 수 있습니다.
+
+#### API 테스트
+API를 로컬에서 테스트하려면 다음 단계를 참조하세요. 각 엔드포인트는 [Postman](https://www.postman.com/) 또는 [curl](https://curl.se/)을 통해 테스트할 수 있습니다.
+
+1. **이미지 업로드**:
+   ```bash
+   curl -X POST "http://localhost:8080/images/upload" \
+   -F "file=@path_to_your_image_file" \
+   -F "fileName=image-file-name.jpg"
+   ```
+
+2. **이미지 목록 조회**:
+   ```bash
+   curl -X GET "http://localhost:8080/images"
+   ```
+
+3. **이미지 삭제**:
+   ```bash
+   curl -X DELETE "http://localhost:8080/images/{fileName}"
+   ```
 
 ```bash
 ./gradlew test
